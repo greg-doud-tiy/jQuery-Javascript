@@ -7,6 +7,8 @@ var triesLeft = 6;
 // Random number between 1 and 100
 var answer = Math.floor(Math.random() * 100) + 1;
 
+console.log("answer is", answer);
+
 $(document).ready(function() {
   var tryBox = $("#try-count");
   var resultMessage = $(".result");
@@ -17,44 +19,44 @@ $(document).ready(function() {
   $("#record-guess").click(function() {
     console.log("Clicked button");
 
-    triesLeft--;
-    tryBox.text("Tries left: " + triesLeft);
-
     var guess = Number( $("#guess").val() );
-    console.log("guess", guess);
 
-    $("#guess").removeClass("invalid");
-
-    var result;
-    if (guess > answer) {
-      result = "High";
-    } else if (guess < answer){
-      result = "Low";
-    } else if (isNaN(guess)) {
-      // Invalid guess
+    // Validate guess
+    if (isNaN(guess)) {
       $("#guess").addClass("invalid");
-      // FIXME: don't update tries
     } else {
-      result = "Correct";
-      resultMessage.text("You win!").show();
+      // Record and display guess
+      $("#guess").removeClass("invalid");
+
+      // Update tries
+      triesLeft--;
+      tryBox.text("Tries left: " + triesLeft);
+
+      // Check result
+      var result;
+      if (guess > answer) {
+        result = "High";
+      } else if (guess < answer){
+        result = "Low";
+      } else {
+        result = "Correct";
+        resultMessage.text("You win!").show();
+      }
+
+      // Test for losing
+      if (triesLeft === 0 && guess !== answer) {
+        resultMessage.
+          text("You lose. Answer is " + answer + ".").
+          show();
+
+        $("#record-guess").attr("disabled", "disabled");
+      }
+
+      // Add result row
+      var newRow = $("<tr><td>" + guess + "</td></tr>");
+      var newCell = $("<td>" + result + "</td>");
+      newRow.append( newCell );
     }
-
-    if (triesLeft === 0 && guess !== answer) {
-      resultMessage.
-        text("You lose. Answer is " + answer + ".").
-        show();
-
-      $("#record-guess").attr("disabled", "disabled");
-    }
-
-    var newRow = $("<tr><td>" + guess + "</td></tr>");
-    var newCell = $("<td>" + result + "</td>");
-    newRow.append( newCell );
-
-    // var html = "<tr><td>" + guess + "</td>";
-    // html += "<td>" + result + "</td>";
-    // html += "</tr>";
-    // var newRow = $(html);
 
     $("table").prepend( newRow );
   });

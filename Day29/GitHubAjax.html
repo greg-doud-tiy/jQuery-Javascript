@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("button").click(function() {
+    		$.ajax({url: "https://api.github.com/users/greg-doud-tiy/repos", 
+    			data : {
+                     sort: "created",
+                     direction : "desc"
+    			}
+            }).then( function(result) {
+    			console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i].name);
+                    var item = $("<li>"+result[i].name+"</li>");
+                    $("#ul1").append(item);
+                }
+    		});
+    	});
+	});
+</script>
+</head>
+<body>
+	<button>GitHubApiCall</button>
+	<ul id="ul1"></ul>
+    <input type="text" id="desc">
+</body>
+</html>

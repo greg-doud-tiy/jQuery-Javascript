@@ -1,0 +1,13 @@
+body {
+	
+}
+div#left, div#right {
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+}
+div#content {
+	width: 75%;
+	border: 1px solid silver;
+	margin: 10px, auto;
+}

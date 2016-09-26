@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="slack.css" type="text/css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="slack.js" ></script>
+<script src="getSlackToken.js" ></script>
+<script>
+	$(document).ready(function() {
+
+
+        var leftDiv = $("#left");
+        listChannels(leftDiv);
+
+        var channel = $("#channel");
+        var message = $("#message");
+        var sendBtn = $("#send");
+
+        $("#send").click(function() {
+            var chan = channel.val();
+            var msg = message.val();
+            console.log(msg);
+            var channelName = findChosenChannel();
+            console.log(channelName);
+            sendMessage(msg, channelName);
+            channel.val("");
+            message.val("");
+        });
+
+	});
+</script>
+</head>
+<body>
+    <div id="content">
+        <div id="left">
+            <p>Channels to message</p>
+        </div>
+        <div id="right">
+            <table>
+                <tr>
+                    <td>Message:</td>
+                    <td><textarea cols="40" rows="5" id="message"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center"><button id="send">Send Message</button></td>
+                </tr>
+            </table>
+        </div>
+        <input id="channelCount" type="hidden" value="0">
+    </div>
+</body>
+</html>

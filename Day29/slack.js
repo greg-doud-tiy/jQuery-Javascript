@@ -1,7 +1,5 @@
 // slack.js
 // message: auth.test
-// https://slack.com/api/chat.postMessage?token=xoxp-63743851541-69679839492-82844943271-d5b5364868aa7fa887166ad9c354be63
-//		&channel=%23random&text=A%20test%20message&pretty=1
 
 
 function sendMessage(msg, channel) {
@@ -22,7 +20,6 @@ function sendMessage(msg, channel) {
 	});
 }
 function listChannels(ctrl) {
-	//var token = "xoxp-63743851541-69679839492-82844943271-d5b5364868aa7fa887166ad9c354be63";
 	var url = "https://slack.com/api/channels.list";
 	var slackToken = getSlackToken();
 	$.ajax(url, {

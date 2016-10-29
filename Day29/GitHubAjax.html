@@ -6,22 +6,37 @@
 <link src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
+    var token = "4c5ed4402496f7756f3a6231162cbf37abc5e368";
+    var requestData = {
+        name: "jQuery-Javascript",
+        description: "A new description"
+    }
+    var request = JSON.stringify(requestData);
 	$(document).ready(function() {
+
 		$("button").click(function() {
-    		$.ajax({url: "https://api.github.com/users/greg-doud-tiy/repos", 
-    			data : {
-                     sort: "created",
-                     direction : "desc"
-    			}
-            }).then( function(result) {
-    			console.log(result);
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i].name);
-                    var item = $("<li>"+result[i].name+"</li>");
-                    $("#ul1").append(item);
-                }
-    		});
-    	});
+            $.ajax({ url: "https://www.github.com/repos/greg-doud-tiy/jQuery-Javascript?access_token=" + token, 
+                verb: "PATCH",
+                data: request
+
+            }).then(function(result) {
+                console.log(result);
+            });
+        });
+    	// 	$.ajax({url: "https://api.github.com/users/greg-doud-tiy/repos", 
+    	// 		data : {
+     //                 sort: "created",
+     //                 direction : "desc"
+    	// 		}
+     //        }).then( function(result) {
+    	// 		console.log(result);
+     //            for (var i = 0; i < result.length; i++) {
+     //                console.log(result[i].name);
+     //                var item = $("<li>"+result[i].name+"&nbsp"+"<button id='upd'>Update</button></li>");
+     //                $("#ul1").append(item);
+     //            }
+    	// 	});
+    	// });
 	});
 </script>
 </head>
